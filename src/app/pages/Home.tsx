@@ -113,7 +113,7 @@ function Hero() {
           From quick repairs to full room upgrades — insured, experienced, and ready to tackle your to-do list.
         </p>
         <div className="flex flex-wrap items-center gap-4">
-          
+          <a
             href="#contact"
             onClick={(e) => { e.preventDefault(); document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); }}
             className="bg-accent text-accent-foreground px-7 py-3 text-sm font-medium tracking-wide hover:opacity-90 transition-opacity duration-200"
@@ -193,7 +193,7 @@ function ServicesSection() {
                   "HVAC Filter Service", "Caulking & Sealing", "Painting & Staining",
                   "Cabinet Installation", "Deck & Patio Work", "Fixture Upgrades",
                 ].map((item) => (
-                  
+                  <a
                     key={item}
                     href="#contact"
                     onClick={(e) => { e.preventDefault(); document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); }}
@@ -235,7 +235,7 @@ function AboutSection() {
           <p>We serve Tucson and the surrounding areas with the kind of care and attention you&apos;d expect from a neighbor. Whether it&apos;s a long list of deferred repairs or a single job that&apos;s been nagging you for months, we show up prepared, treat your home with respect, and leave it better than we found it.</p>
           <p>We&apos;re not licensed contractors — but we are fully insured, and John brings 35 years of hands-on experience in the trades. That means honest work, realistic expectations, and the kind of craftsmanship that only comes from decades on the job.</p>
         </div>
-        
+        <a
           href="#contact"
           onClick={(e) => { e.preventDefault(); document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); }}
           className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-accent hover:gap-4 transition-all duration-200 group"
