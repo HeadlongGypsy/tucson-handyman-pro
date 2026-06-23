@@ -12,11 +12,40 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     const phone      = form.get("phone")?.toString()      ?? "";
     const message    = form.get("message")?.toString()    ?? "";
 
-    // Save to D1 database
+    // Check if customer already exists
+    const existing = await env.DB.prepare(
+      `SELECT id FROM customers WHERE email = ?`
+    ).bind(email).first();
+
+    let customer_id: number;
+
+    if (existing) {
+      // Customer already exists — use their ID
+      customer_id = existing.id as number;
+    } else {
+      // New customer — create record
+      const result = await env.DB.prepare(
+        `INSERT INTO customers (first_name, last_name, email, phone, source)
+         VALUES (?, ?, ?, ?, ?)
+         RETURNING id`
+      ).bind(first_name, last_name, email, phone, "contact_form").first();
+      customer_id = result!.id as number;
+
+      // Tag new customer
+      await env.DB.prepare(
+        `INSERT INTO tags (customer_id, tag) VALUES (?, ?)`
+      ).bind(customer_id, "general_inquiry").run();
+
+      await env.DB.prepare(
+        `INSERT INTO tags (customer_id, tag) VALUES (?, ?)`
+      ).bind(customer_id, "contact_form").run();
+    }
+
+    // Save lead linked to customer
     await env.DB.prepare(
-      `INSERT INTO leads (first_name, last_name, email, phone, message)
-       VALUES (?, ?, ?, ?, ?)`
-    ).bind(first_name, last_name, email, phone, message).run();
+      `INSERT INTO leads (customer_id, first_name, last_name, email, phone, message, status)
+       VALUES (?, ?, ?, ?, ?, ?, ?)`
+    ).bind(customer_id, first_name, last_name, email, phone, message, "new").run();
 
     // Send notification email to John
     await fetch("https://api.resend.com/emails", {
@@ -36,6 +65,8 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
           <p><strong>Phone:</strong> ${phone || "Not provided"}</p>
           <p><strong>Message:</strong></p>
           <p>${message}</p>
+          <p><strong>Customer ID:</strong> ${customer_id}</p>
+          <p><strong>Status:</strong> New lead</p>
         `,
       }),
     });
