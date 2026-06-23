@@ -1,0 +1,7 @@
+name = "tucson-handyman-pro"
+compatibility_date = "2024-01-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "tucson-handyman-pro"
+database_id = "f3d7aaf3-89b5-4f97-a2a0-e9c5c795ca80"
