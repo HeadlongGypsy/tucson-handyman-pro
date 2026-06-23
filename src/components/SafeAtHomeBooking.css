@@ -1,0 +1,296 @@
+/* SafeAtHomeBooking.css — drop alongside the component */
+
+.sah-booking {
+  max-width: 480px;
+  margin: 0 auto;
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #1a1a1a;
+}
+
+/* Progress */
+.sah-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 32px;
+}
+.sah-progress-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  position: relative;
+  font-size: 11px;
+  color: #999;
+}
+.sah-progress-step::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: -50%;
+  right: 50%;
+  height: 2px;
+  background: #e5e7eb;
+}
+.sah-progress-step:first-child::before { display: none; }
+.sah-progress-step.active::before { background: #d97706; }
+.sah-progress-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #e5e7eb;
+  color: #999;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+}
+.sah-progress-step.active .sah-progress-dot {
+  background: #d97706;
+  color: white;
+}
+
+/* Steps */
+.sah-step h3 {
+  margin: 0 0 4px;
+  font-size: 20px;
+  font-weight: 700;
+}
+.sah-subtitle {
+  color: #666;
+  margin: 0 0 24px;
+  font-size: 14px;
+}
+.sah-hint {
+  font-size: 12px;
+  color: #999;
+  margin-top: 12px;
+}
+
+/* Calendar */
+.sah-calendar {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.sah-cal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+.sah-cal-nav {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: #374151;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+.sah-cal-nav:hover:not(:disabled) { background: #e5e7eb; }
+.sah-cal-nav:disabled { opacity: 0.3; cursor: default; }
+.sah-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  padding: 12px;
+}
+.sah-cal-dow {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: #9ca3af;
+  padding: 4px 0;
+}
+.sah-cal-day {
+  aspect-ratio: 1;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  background: none;
+  transition: background 0.15s;
+}
+.sah-cal-day.available:hover { background: #fef3c7; color: #92400e; }
+.sah-cal-day.disabled { color: #d1d5db; cursor: default; }
+
+/* Slots */
+.sah-slots {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 8px 0 24px;
+}
+.sah-slot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  background: white;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  font-size: 15px;
+}
+.sah-slot:hover { border-color: #d97706; background: #fffbeb; }
+.sah-slot-label { font-weight: 600; }
+.sah-slot-duration { font-size: 12px; color: #9ca3af; }
+
+/* Form */
+.sah-booking-summary {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 14px;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+.sah-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.sah-field label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+.sah-optional {
+  font-weight: 400;
+  color: #9ca3af;
+}
+.sah-field input,
+.sah-field textarea {
+  padding: 10px 14px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.15s;
+  font-family: inherit;
+}
+.sah-field input:focus,
+.sah-field textarea:focus { border-color: #d97706; }
+.sah-field-error {
+  font-size: 12px;
+  color: #dc2626;
+}
+.sah-price-notice {
+  font-size: 13px;
+  color: #374151;
+  background: #f9fafb;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin: 16px 0;
+}
+
+/* Payment */
+.sah-payment-element {
+  margin: 16px 0;
+}
+.sah-price-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-top: 1px solid #e5e7eb;
+  font-size: 15px;
+  margin-bottom: 16px;
+}
+
+/* Actions */
+.sah-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.sah-btn-primary {
+  flex: 1;
+  padding: 13px 20px;
+  background: #d97706;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.sah-btn-primary:hover:not(:disabled) { background: #b45309; }
+.sah-btn-primary:disabled { opacity: 0.5; cursor: default; }
+.sah-btn-back {
+  padding: 13px 16px;
+  background: none;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  color: #374151;
+  white-space: nowrap;
+}
+.sah-btn-back:hover { background: #f9fafb; }
+.sah-btn-secondary {
+  padding: 10px 16px;
+  background: #f9fafb;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #374151;
+  margin-top: 8px;
+}
+.sah-btn-secondary:hover { background: #e5e7eb; }
+
+/* States */
+.sah-loading { color: #9ca3af; padding: 24px 0; text-align: center; }
+.sah-error {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+.sah-empty { text-align: center; padding: 24px 0; }
+
+/* Confirmation */
+.sah-confirmation { text-align: center; }
+.sah-check {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #d1fae5;
+  color: #065f46;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+.sah-confirm-details {
+  background: #f9fafb;
+  border-radius: 10px;
+  padding: 16px;
+  margin: 20px 0;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.sah-confirm-details > div {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+.sah-confirm-details span { color: #9ca3af; }
