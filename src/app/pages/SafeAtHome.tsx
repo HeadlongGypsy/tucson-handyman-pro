@@ -2,7 +2,7 @@ import { ArrowRight, Phone } from "lucide-react";
 import { Link } from "react-router";
 import heroImage from "../../imports/Gates_THP_Header_Crop.jpg";
 import { ContactSection } from "./Home";
-import BookingModal from "../components/BookingModal";
+import BookingModal from "../../components/BookingModal";
 
 const INCLUDED = [
   {
