@@ -4,34 +4,19 @@ import { ArrowRight, Phone } from "lucide-react";
 import heroImage from "../../imports/Gates_THP_Header_Crop.jpg";
 import { SERVICES } from "../Layout";
 
-/*
- * FORM SETUP — takes about 2 minutes:
- * 1. Go to https://formspree.io and create a free account
- * 2. Create a new form and copy your Form ID (looks like "xpwzgkla")
- * 3. Open the file .env in the project root (create it if it doesn't exist)
- * 4. Add this line:  VITE_FORMSPREE_ID=your_form_id_here
- * 5. Restart the dev server — form submissions will arrive in your email
- */
-const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID;
-
 export function ContactSection() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!FORMSPREE_ID) {
-      // No Formspree ID set yet — just show success so the UI works during dev
-      setStatus("sent");
-      return;
-    }
     setStatus("sending");
     try {
-      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+      const res = await fetch("/api/contact", {
         method: "POST",
-        headers: { Accept: "application/json" },
         body: new FormData(e.currentTarget),
       });
-      setStatus(res.ok ? "sent" : "error");
+      const data = await res.json();
+      setStatus(data.ok ? "sent" : "error");
     } catch {
       setStatus("error");
     }
@@ -128,7 +113,7 @@ function Hero() {
           From quick repairs to full room upgrades — insured, experienced, and ready to tackle your to-do list.
         </p>
         <div className="flex flex-wrap items-center gap-4">
-          <a
+          
             href="#contact"
             onClick={(e) => { e.preventDefault(); document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); }}
             className="bg-accent text-accent-foreground px-7 py-3 text-sm font-medium tracking-wide hover:opacity-90 transition-opacity duration-200"
@@ -208,7 +193,7 @@ function ServicesSection() {
                   "HVAC Filter Service", "Caulking & Sealing", "Painting & Staining",
                   "Cabinet Installation", "Deck & Patio Work", "Fixture Upgrades",
                 ].map((item) => (
-                  <a
+                  
                     key={item}
                     href="#contact"
                     onClick={(e) => { e.preventDefault(); document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); }}
@@ -250,7 +235,7 @@ function AboutSection() {
           <p>We serve Tucson and the surrounding areas with the kind of care and attention you&apos;d expect from a neighbor. Whether it&apos;s a long list of deferred repairs or a single job that&apos;s been nagging you for months, we show up prepared, treat your home with respect, and leave it better than we found it.</p>
           <p>We&apos;re not licensed contractors — but we are fully insured, and John brings 35 years of hands-on experience in the trades. That means honest work, realistic expectations, and the kind of craftsmanship that only comes from decades on the job.</p>
         </div>
-        <a
+        
           href="#contact"
           onClick={(e) => { e.preventDefault(); document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); }}
           className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-accent hover:gap-4 transition-all duration-200 group"
