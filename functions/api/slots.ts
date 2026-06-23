@@ -14,7 +14,7 @@ interface Env {
 const SLOT_DURATION_MINUTES = 150; // 2.5 hours
 
 // All possible slot start times (HH:MM) within 8:30–16:00
-const ALL_SLOTS = ['08:30', '11:00', '13:30'];
+const ALL_SLOTS = ['08:30', '12:00'];
 // 13:30 + 2.5hr = 16:00 exactly ✓
 
 export const onRequestGet: PagesFunction<Env> = async ({ request, env }) => {
